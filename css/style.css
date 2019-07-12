@@ -35,6 +35,9 @@ body {margin: 0;}
   list-style: none;
   position: relative;
 }
+ul {
+  min-height: 100px;
+}
 .column-add-card {
   cursor: pointer;
   text-decoration: underline;

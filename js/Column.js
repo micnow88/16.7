@@ -23,14 +23,35 @@ function Column(id, name) {
     			headers: myHeaders,
     			body: data,
   			})
-  			.then(function(res) {
-   				return res.json();
+  			.then(function(resp) {
+   				return resp.json();
   			})
   			.then(function(resp) {
     			var card = new Card(resp.id, cardName);
     			self.addCard(card);
   			});
-		}
+		  }
+
+      if (event.target.classList.contains('column-title')) {
+        var newColumnName = prompt("Enter the new column name:");
+        event.preventDefault();
+
+        var data = new FormData();
+          data.append('name', newColumnName);
+
+        fetch(baseUrl + '/column/' + self.id, {
+          method: 'PUT',
+          headers: myHeaders,
+          //body: data,
+          name: data,
+        })
+        .then(function(resp) {
+          return resp.json();
+        })
+        .then(function(resp) {
+          this.name = newColumnName || "No name given";
+        });
+      }
 	});
 }
 
